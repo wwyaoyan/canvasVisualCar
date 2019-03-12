@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html style="height:100%">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>绚丽倒计时</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="canvasVisual.css" />
+    <style>
+        .Content{
+            min-width: 1240px!important;
+        }
+    </style>
+</head>
+<body style="height: 100%">
+<div class="Card-content canvasContent">
+    <p class="operaties u-textLeft opeBtns">
+        <button type="button" class="btn btn-default js-saveData">保存设置结果</button>
+        <button type="button" class="btn btn-default js-addData">新增</button>
+        <button type="button" class="btn btn-default js-editVisual">编辑</button>
+        <button type="button" bol="1" class="btn btn-default js-more-delete">开启删除</button>
+        <button type="button" class="btn btn-default js-drawBoundary">划定仓库范围</button>
+        <button type="button" class="btn btn-default js-setDoor">设置大门</button>
+        <button type="button" class="btn btn-default js-insertData">插入库位</button>
+    </p>
+    <div class="thumbnail">
+        <canvas id="thumbCanvas" width="400px" height="400px"></canvas>
+    </div>
+    <div class="contain containMain">
+        <canvas id="chess" width="1502px" height="1502px"></canvas>
+    </div>
+    <img id="doorImg" class="u-hidden" src="door.jpeg" alt="卖好车" />
+</div>
+
+<!-- 模态框（Modal） -->
+<!--添加-->
+<div class="modal fade js-selectArea Dialog--selectArea">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title">添加</h4>
+            </div>
+            <div class="modal-body">
+                <form class="Form--warehouse form-horizontal js-fillDeliveryInfo">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label is-required">库区编号</label>
+                        <div class="col-sm-9"><input type="text" class="form-control input-sm" name="selectName" required="required" data-h5f-label="库区编号" placeholder="请填写库区编号，如：A" /></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label is-required">选择库位排列方向</label>
+                        <div class="col-sm-4">
+                            <label>横向/竖向</label>
+                            <select name="rowCol" class="form-control rowCol">
+                                <option value="1">横向</option>
+                                <option value="2">竖向</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>左右/上下</label>
+                            <select name="direcType" class="form-control direcType">
+                            </select>
+                        </div>
+                        <div class="col-sm-9">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">库位起始行数</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control input-sm js-checkInteger" name="startNumRow" required="required" data-h5f-label="库位起始行数" placeholder="请填写库位起始行数，如：3" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">库位起始列数</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control input-sm js-checkInteger" name="startNumCol" required="required" data-h5f-label="库位起始列数" placeholder="请填写库位起始列数，如：3" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default js-rebackSelect">关闭</button>
+                <button type="button" class="btn btn-primary js-confirm">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--修改-->
+<div class="modal fade js-modify Dialog--modify">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title">编辑</h4>
+            </div>
+            <div class="modal-body">
+                <form class="Form--warehouse form-horizontal js-fillDeliveryInfo">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label is-required">当前库位编号</label>
+                        <div class="col-sm-9"><input type="text" class="form-control input-sm" name="inputStart" required="required" data-h5f-label="当前库位编号" placeholder="请填写当前库位编号，如：A-1-1" /></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label is-required">库区编号</label>
+                        <div class="col-sm-9"><input type="text" class="form-control input-sm" name="modifyName" required="required" data-h5f-label="库区编号" placeholder="请填写库区编号，如：A" /></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label is-required">库位排数</label>
+                        <div class="col-sm-9"><input type="text" class="form-control input-sm js-checkInteger" name="rowsId" required="required" data-h5f-label="库位排数" placeholder="请填写库位排数，如：3" /></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label is-required">库位列数</label>
+                        <div class="col-sm-9"><input type="text" class="form-control input-sm js-checkInteger" name="colsId" required="required" data-h5f-label="库位列数" placeholder="请填写库位列数，如：3" /></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary js-confirmModify">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--删除-->
+<div class="modal fade js-showDelete Dialog--showDelete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title">删除</h4>
+            </div>
+            <div class="modal-body">
+                <form class="Form--warehouse form-horizontal js-fillDeliveryInfo">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label is-required">起始位置</label>
+                        <div class="col-sm-9"><input type="text" class="form-control input-sm" name="deleteStart" required="required" data-h5f-label="起始位置" placeholder="请输入起始位置，如：A-1-1" /></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label is-required">删除行数</label>
+                        <div class="col-sm-9"><input type="text" class="form-control input-sm js-checkInteger" name="deleteRows" required="required" data-h5f-label="删除行数" placeholder="请输入删除行数，如：2" /></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label is-required">删除列数</label>
+                        <div class="col-sm-9"><input type="text" class="form-control input-sm js-checkInteger" name="deleteCols" required="required" data-h5f-label="删除列数" placeholder="请输入删除列数，如：2" maxlength="90" /></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary js-deleteData">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--插入库位-->
+<div class="modal fade js-insertStar Dialog--insertStar">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title">插入库位</h4>
+            </div>
+            <div class="modal-body">
+                <form class="Form--warehouse form-horizontal js-fillDeliveryInfo">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label is-required">起始库位</label>
+                        <div class="col-sm-9"><input type="text" class="form-control input-sm" name="insertStart" required="required" data-h5f-label="起始库位" placeholder="请填写起始库位，如：A-2-1" /></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label is-required">选择库位排列方向</label>
+                        <div class="col-sm-9">
+                            <label class="radio-inline"><input name="insertArrange" type="radio" value="1" checked="checked" />横向 </label>
+                            <label class="radio-inline"><input name="insertArrange" type="radio" value="2" />竖向 </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label is-required">插入行数／列数</label>
+                        <div class="col-sm-9"><input type="text" class="form-control input-sm js-checkInteger insertNum" name="insertNum " required="required" data-h5f-label="插入行数／列数" placeholder="请填写行数／列数，如：3" /></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary js-confirmInsert">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tipFrame tipSuccess u-hidden">
+    <p>保存成功！</p>
+</div>
+<div class="tipFrame js-tipLineX u-hidden">
+    <p>请选择竖向界线！</p>
+</div>
+<div class="tipFrame js-tipLineY u-hidden">
+    <p>请选择横线界线！</p>
+</div>
+<div class="tipFrame js-tipDoor u-hidden">
+    <p>请选择大门位置！</p>
+</div>
+
+<script src="canvasVisual.js"></script>
+</body>
+</html>

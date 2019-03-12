@@ -1,0 +1,310 @@
+.u-hidden {
+    display: none!important;
+}
+
+.Form--warehouse select {
+    width: 100%;
+}
+
+.Field--address {
+    margin-top: 5px;
+}
+
+.Dialog--warehouseInfo table, #leaseInfo table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.Dialog--warehouseInfo table th, #leaseInfo table th,
+.Dialog--warehouseInfo table td, #leaseInfo table td {
+    padding: 5px 10px;
+    vertical-align: top;
+}
+
+.Dialog--warehouseInfo table th {
+    text-align: right;
+}
+
+.Dialog--warehouseInfo .u-payModeDetail table th {
+    text-align: left;
+}
+
+
+
+.Parking + .Parking {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #ebebeb;
+}
+
+.Parking.is-editing .Parking-operation {
+    display: none;
+}
+
+.Parking-header {
+    position: relative;
+}
+
+.Parking-operation {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.Parking-operation .btn + .btn {
+    margin-left: 5px;
+}
+
+.Parking-header h5 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.Parking-body {
+    margin-top: 8px;
+}
+
+.Parking-body p {
+    margin-bottom: 0;
+}
+
+.Parking-body p strong {
+    margin-right: 3px;
+    margin-left: 3px;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+.Parking-body p + p {
+    position: relative;
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    background-color: #f5f5f5;
+}
+
+.Parking-body p + p:before,
+.Parking-body p + p:after {
+    content: "\0020";
+    position: absolute;
+    left: 30px;
+    bottom: 100%;
+    width: 0;
+    height: 0;
+    border: 0 solid transparent;
+    border-top-width: 0 !important;
+}
+
+.Parking-body p + p:before {
+    border-width: 8px;
+    border-bottom-color: #e0e0e0;
+}
+
+.Parking-body p + p:after {
+    margin-left: 1px;
+    border-width: 7px;
+    border-bottom-color: #f5f5f5;
+}
+
+
+
+/*库位可视化*/
+canvas {
+    display: block;
+    margin: 0 auto;
+    box-shadow: -2px -2px 2px #efefef, 5px 5px 5px #b9b9b9;
+    cursor: pointer;
+}
+
+input{
+    display: block;
+    margin-bottom: 10px;
+}
+
+form input{
+    display: inline;
+}
+
+.contain{
+    width: 750px;
+    height: 750px;
+    margin: 0 auto;
+    overflow: auto;
+}
+
+.tipFrame{
+    position: absolute;
+    top: 50%;
+    left: 48%;
+    background-color: #000;
+    opacity: 0.8;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+.tipFrame p{
+    margin: 0;
+}
+
+.u-marginLeft{
+    margin-left: 10px;
+}
+
+.Info-tip {
+    font-size: 12px;
+    color: #666;
+}
+
+.Dialog--warehouseInfo .modal-body-header h5 {
+    float: left;
+}
+
+.Dialog--warehouseInfo .modal-body-header a {
+    float: right;
+}
+
+
+/*新增*/
+.Content {
+    padding-bottom: 0!important;
+}
+@media (min-width: 768px) {
+    .navbar-nav > li > a {
+        padding-top: 15.5px;
+        padding-bottom: 15.5px;
+    }
+}
+.navbar {
+    min-height: 50px;
+}
+.canvasContent{
+    overflow: hidden;
+    min-width:1200px;
+}
+.opeBtns{
+    margin-left:420px;
+}
+.thumbnail{
+    width:400px;
+    height:400px;
+    border: 1px solid orange;
+    float: left;
+}
+/*.thumbnailTitle{*/
+/*text-align: center;*/
+/*line-height:40px;*/
+/*}*/
+.containMain{
+    margin-left:20px;
+    float: left;
+}
+.newWarehouse {
+    overflow-x: hidden!important;
+}
+.block-nav>li>a {
+    display: block;
+    position: relative;
+    padding: 10px 15px;
+}
+.block-nav:after {
+    clear: both;
+}
+.block-nav:after, .block-nav:before {
+    content: " ";
+    display: table;
+}
+.edit-info {
+    border-bottom: 1px solid #ddd;
+    width:96%;
+    margin-left: 2%;
+}
+.edit-info:last-child {
+    border-bottom: none;
+}
+.edit-info .js-editbutton {
+    text-align: center;
+}
+select[name=payMode]+.select2-container {
+    width:23%!important;
+}
+.u-addProtocol,.u-addInsurance {
+    background: #ddd;
+    padding:0 10px;
+    margin: 10px 0;
+}
+.u-protocol-title,.u-insurance-title{
+    overflow: hidden;
+    padding:15px;
+}
+.u-protocol-title .js-editProtocol,.u-insurance-title .js-editInsurance {
+    margin-right: 15px;
+}
+.nav-tabs .js-addNewLot {
+    padding: 12px 15px;
+    display: inline-block;
+    cursor: pointer;
+    color: #337ab7;
+}
+input[name=longitude],
+input[name=latitude],
+input[name=longitudeGaode],
+input[name=latitudeGaode]
+{
+    display: inline-block;
+    width:23%;
+}
+
+.gaode-help-block {
+    position: absolute;
+    top: 25px;
+    left: 270px;
+    font-size: 12px;
+}
+
+.u-warehouse-width .select2-container.select2 {
+    width:19%!important;
+}
+.u-provAreaId-width .select2-container.select2 {
+    width:100%!important;
+}
+input[name=address] {
+    display: inline-block;
+    width:38%;
+}
+.control-span {
+    display: inline-block;
+    margin-top: 7px;
+}
+.u-addProtocol select {
+    display: inline-block;
+    width:25%;
+}
+.edit-info {
+    position: relative;
+}
+.js-editWarehouseInfo {
+    position: absolute;
+    top: 0;
+    right:30px;
+}
+.padding-right-left {
+    padding-right: 0;
+    margin-left: 10px;
+}
+.padding-left-30 {
+    padding-left: 30px;
+}
+label {
+    font-weight: 100;
+}
+
+.checkbox-inline+.checkbox-inline, .radio-inline+.radio-inline,.checkbox-inline, .radio-inline{
+    margin-left: 0;
+    margin-right: 10px;
+}
+.js-payItems {
+    padding-left: 35px;
+}
